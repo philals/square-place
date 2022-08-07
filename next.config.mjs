@@ -1,5 +1,6 @@
 // @ts-check
 import { env } from "./src/env/server.mjs";
+import nn from "next-transpile-modules";
 
 /**
  * Don't be scared of the generics here.
@@ -13,7 +14,11 @@ function defineNextConfig(config) {
   return config;
 }
 
-export default defineNextConfig({
-  reactStrictMode: true,
-  swcMinify: true,
-});
+const withTM = nn(["react-pixel-grid"]);
+
+export default withTM(
+  defineNextConfig({
+    reactStrictMode: true,
+    swcMinify: true,
+  })
+);
