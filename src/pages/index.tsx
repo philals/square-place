@@ -1,30 +1,24 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { trpc } from "../utils/trpc";
-import PixelGrid from "react-pixel-grid";
+import { GridRender } from "../components/GridRender";
 
 const Home: NextPage = () => {
   const hello = trpc.proxy.example.hello.useQuery({ text: "from tRPC" });
   const grids = trpc.proxy.grid.getAll.useQuery();
-  const one = trpc.proxy.grid.getOne.useQuery();
   const mutation = trpc.proxy.grid.makeAGrid.useMutation();
   const deleteAll = trpc.proxy.grid.deleteAll.useMutation();
-  console.log("🚀 ~ one", one.data);
-  console.log("🚀 ~ grids", grids.data);
+  // console.log("🚀🚀 ~ grids.data?.grids", grids.data?.grids);
+  // console.log(
+  //   "🚀🚀 ~ grids.data?.grids[0]?.pixels",
+  //   grids.data?.grids[0]?.pixels
+  // );
 
-  const r = "#f00";
-  const g = "#0f0";
-  const b = "#00f";
-  const x = "#000";
+  // console.log("🚀🚀 ~ STRING grids.data", JSON.stringify(grids.data));
 
-  const Atoms = [
-    [r, g, b, x],
-    [r, g, b, x],
-    [r, g, b, x],
-    [r, g, b, x],
-    [r, g, b, x],
-    [r, g, b, x],
-  ];
+  if (grids.isLoading) {
+    return <p>Loading..</p>;
+  }
 
   return (
     <>
@@ -34,13 +28,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="container flex flex-col items-center justify-center min-h-screen p-4 mx-auto">
-        <PixelGrid
-          data={Atoms}
-          options={{
-            size: 10,
-            padding: 0,
-          }}
-        />
+        <GridRender grids={grids.data?.grids || []} />;
         <button onClick={() => mutation.mutate()}>Mutation</button>
         <button onClick={() => deleteAll.mutate()}>Clear All</button>
         <div className="flex items-center justify-center w-full pt-6 text-2xl text-blue-500">

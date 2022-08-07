@@ -15,8 +15,22 @@ export const gridRouter = t.router({
 
         const pixels = await ctx.prisma.pixel.createMany({
           data: [
-            { color: Color.Blue, version: 1, gridId: newGrid.id },
-            { color: Color.Green, version: 1, gridId: newGrid.id },
+            { color: Color.CarolinaBlue, version: 1, gridId: newGrid.id },
+            { color: Color.ChartreuseWeb, version: 1, gridId: newGrid.id },
+            { color: Color.Malachite, version: 1, gridId: newGrid.id },
+            { color: Color.Mango, version: 1, gridId: newGrid.id },
+            { color: Color.Mango, version: 1, gridId: newGrid.id },
+            { color: Color.RedPurple, version: 1, gridId: newGrid.id },
+            { color: Color.RedPurple, version: 1, gridId: newGrid.id },
+            { color: Color.Malachite, version: 1, gridId: newGrid.id },
+            { color: Color.ChartreuseWeb, version: 1, gridId: newGrid.id },
+            { color: Color.RedPurple, version: 1, gridId: newGrid.id },
+            { color: Color.ChartreuseWeb, version: 1, gridId: newGrid.id },
+            { color: Color.CarolinaBlue, version: 1, gridId: newGrid.id },
+            { color: Color.RedPurple, version: 1, gridId: newGrid.id },
+            { color: Color.ChartreuseWeb, version: 1, gridId: newGrid.id },
+            { color: Color.Malachite, version: 1, gridId: newGrid.id },
+            { color: Color.RedPurple, version: 1, gridId: newGrid.id },
           ],
         });
         console.log("🚀🚀 ~ pixels", pixels);
@@ -28,16 +42,14 @@ export const gridRouter = t.router({
         greeting: `Hello ${input?.text ?? "world"}`,
       };
     }),
-  getAll: t.procedure.query(({ ctx }) => {
-    const res = ctx.prisma.grid.findMany({ include: { pixels: true } });
-    console.log("🚀🚀 ~ res", res);
-    return res;
+  getAll: t.procedure.query(async ({ ctx }) => {
+    const res = await ctx.prisma.grid.findMany({ include: { pixels: true } });
+    return { grids: res };
   }),
-  getOne: t.procedure.query(({ ctx }) => {
-    const res = ctx.prisma.grid.findFirst({
+  getOne: t.procedure.query(async ({ ctx }) => {
+    const res = await ctx.prisma.grid.findFirst({
       include: { pixels: true },
     });
-    console.log("🚀🚀 ~ res", res);
     return res;
   }),
   deleteAll: t.procedure.mutation(async ({ ctx }) => {
