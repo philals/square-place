@@ -10,30 +10,14 @@ export const gridRouter = t.router({
     .input(z.object({ text: z.string().nullish() }).nullish())
     .mutation(async ({ input, ctx }) => {
       try {
-        const newGrid = await ctx.prisma.grid.create({ data: { version: 1 } });
-        console.log("🚀🚀 ~ newGrid", newGrid);
-
-        const pixels = await ctx.prisma.pixel.createMany({
-          data: [
-            { color: Color.CarolinaBlue, version: 1, gridId: newGrid.id },
-            { color: Color.ChartreuseWeb, version: 1, gridId: newGrid.id },
-            { color: Color.Malachite, version: 1, gridId: newGrid.id },
-            { color: Color.Mango, version: 1, gridId: newGrid.id },
-            { color: Color.Mango, version: 1, gridId: newGrid.id },
-            { color: Color.RedPurple, version: 1, gridId: newGrid.id },
-            { color: Color.RedPurple, version: 1, gridId: newGrid.id },
-            { color: Color.Malachite, version: 1, gridId: newGrid.id },
-            { color: Color.ChartreuseWeb, version: 1, gridId: newGrid.id },
-            { color: Color.RedPurple, version: 1, gridId: newGrid.id },
-            { color: Color.ChartreuseWeb, version: 1, gridId: newGrid.id },
-            { color: Color.CarolinaBlue, version: 1, gridId: newGrid.id },
-            { color: Color.RedPurple, version: 1, gridId: newGrid.id },
-            { color: Color.ChartreuseWeb, version: 1, gridId: newGrid.id },
-            { color: Color.Malachite, version: 1, gridId: newGrid.id },
-            { color: Color.RedPurple, version: 1, gridId: newGrid.id },
-          ],
-        });
-        console.log("🚀🚀 ~ pixels", pixels);
+        await makeNewGrid(ctx.prisma, Color.CyberGreen);
+        await makeNewGrid(ctx.prisma, Color.DarkGreen);
+        await makeNewGrid(ctx.prisma, Color.LightPurple);
+        await makeNewGrid(ctx.prisma, Color.NaveyPurple);
+        await makeNewGrid(ctx.prisma, Color.Purple);
+        await makeNewGrid(ctx.prisma, Color.CyberGreen);
+        await makeNewGrid(ctx.prisma, Color.DarkGreen);
+        await makeNewGrid(ctx.prisma, Color.LightPurple);
       } catch (error) {
         console.log("🚀🚀 ~ error", error);
       }
@@ -58,3 +42,30 @@ export const gridRouter = t.router({
     return {};
   }),
 });
+
+async function makeNewGrid(prisma: any, color: Color) {
+  const newGrid = await prisma.grid.create({ data: { version: 1 } });
+  console.log("🚀🚀 ~ newGrid", newGrid);
+
+  const pixels = await prisma.pixel.createMany({
+    data: [
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+    ],
+  });
+  console.log("🚀🚀 ~ pixels", pixels);
+}

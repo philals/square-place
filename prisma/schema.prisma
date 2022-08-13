@@ -31,18 +31,19 @@ model Pixel {
 }
 
 enum Color {
-    Malachite
-    Mango
-    CarolinaBlue
+    LightPurple
+    Purple
+    NaveyPurple
+    DarkGreen
     RedPurple
-    ChartreuseWeb
+    CyberGreen
 }
 
-// --malachite: #04e762ff;
-// --mango: #f5b700ff;
-// --carolina-blue: #00a1e4ff;
-// --red-purple: #dc0073ff;
-// --chartreuse-web: #89fc00ff;
+//  LightPurple: '#8386f5',
+//   Purple: '#3d43b4',
+//   NaveyPurple: '#041348',
+//   DarkGreen: '#083e12',
+//   CyberGreen: '#1afe49'
 
 // Necessary for Next auth
 model Account {
