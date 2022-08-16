@@ -1,7 +1,8 @@
 import { Grid as pGrid, Pixel } from "@prisma/client";
 
-export type ArrayOfGrids = Array<Grid>;
+export type ArrayOfGrids = Array<ParttialGrid>;
 export type Grid = { pixels: Pixel[] };
+export type ParttialGrid = { pixels: Partial<Pixel>[] };
 
 export function processGrid(grids: ArrayOfGrids) {
   const it: string[][] = [];
@@ -24,7 +25,7 @@ function processTheseFour(fourGrids: ArrayOfGrids): Array<Array<string>> {
 
   const toRetuen = [firstFour, secondFour, thirdFour, fourthFour];
 
-  return toRetuen;
+  return toRetuen as Array<Array<string>>;
 }
 
 // TODO: Refactor all all

@@ -1,28 +1,15 @@
 import PixelGrid from "react-pixel-grid";
 import { Grid as pGrid, Pixel } from "@prisma/client";
-import { Grid, processGrid } from "./processGrid";
+import { Grid, ParttialGrid, processGrid } from "./processGrid";
 import React, { useState } from "react";
 
 export const GridEditor = (props: { grid?: Grid }) => {
-  //   const [grid, setGrid] = useState<Grid>(
-  //     props?.grid || {
-  //       pixels: [
-  //         "#FFFFFF",
-  //         "#FFFFFF",
-  //         "#FFFFFF",
-  //         "#FFFFFF",
-  //         "#FFFFFF",
-  //         "#FFFFFF",
-  //         "#FFFFFF",
-  //         "#FFFFFF",
-  //       ],
-  //     }
-  //   );
+  const [grid, setGrid] = useState<ParttialGrid>(props?.grid || whiteGrid);
 
   return (
     <>
       <PixelGrid
-        data={[]}
+        data={processGrid([grid])}
         options={{
           size: 40,
           padding: 0,
@@ -33,6 +20,28 @@ export const GridEditor = (props: { grid?: Grid }) => {
   );
 };
 
-const emptyGrid: Grid = {
-  pixels: [],
+const greyPixel = {
+  color: "#808080",
+  version: 1,
+};
+
+const whiteGrid: ParttialGrid = {
+  pixels: [
+    greyPixel,
+    greyPixel,
+    greyPixel,
+    greyPixel,
+    greyPixel,
+    greyPixel,
+    greyPixel,
+    greyPixel,
+    greyPixel,
+    greyPixel,
+    greyPixel,
+    greyPixel,
+    greyPixel,
+    greyPixel,
+    greyPixel,
+    greyPixel,
+  ],
 };
