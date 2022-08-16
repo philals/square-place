@@ -24,19 +24,10 @@ model Grid {
 
 model Pixel {
     id      String @id @default(cuid())
-    color   Color
+    color   String
     version Int
     gridId  String
     Grid    Grid   @relation(fields: [gridId], references: [id])
-}
-
-enum Color {
-    LightPurple
-    Purple
-    NaveyPurple
-    DarkGreen
-    RedPurple
-    CyberGreen
 }
 
 //  LightPurple: '#8386f5',

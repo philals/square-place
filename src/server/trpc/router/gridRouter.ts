@@ -1,7 +1,5 @@
 import { t } from "../utils";
 import { z } from "zod";
-import { Color } from "@prisma/client";
-import { cp } from "fs";
 
 const version = 1;
 
@@ -10,14 +8,14 @@ export const gridRouter = t.router({
     .input(z.object({ text: z.string().nullish() }).nullish())
     .mutation(async ({ input, ctx }) => {
       try {
-        await makeNewGrid(ctx.prisma, Color.CyberGreen);
-        await makeNewGrid(ctx.prisma, Color.DarkGreen);
-        await makeNewGrid(ctx.prisma, Color.LightPurple);
-        await makeNewGrid(ctx.prisma, Color.NaveyPurple);
-        await makeNewGrid(ctx.prisma, Color.Purple);
-        await makeNewGrid(ctx.prisma, Color.CyberGreen);
-        await makeNewGrid(ctx.prisma, Color.DarkGreen);
-        await makeNewGrid(ctx.prisma, Color.LightPurple);
+        await makeNewGrid(ctx.prisma, "#1afe49");
+        await makeNewGrid(ctx.prisma, "#083e12");
+        await makeNewGrid(ctx.prisma, "#8386f5");
+        await makeNewGrid(ctx.prisma, "#041348");
+        await makeNewGrid(ctx.prisma, "#3d43b4");
+        await makeNewGrid(ctx.prisma, "#1afe49");
+        await makeNewGrid(ctx.prisma, "#083e12");
+        await makeNewGrid(ctx.prisma, "#8386f5");
       } catch (error) {
         console.log("🚀🚀 ~ error", error);
       }
@@ -43,7 +41,7 @@ export const gridRouter = t.router({
   }),
 });
 
-async function makeNewGrid(prisma: any, color: Color) {
+async function makeNewGrid(prisma: any, color: string) {
   const newGrid = await prisma.grid.create({ data: { version: 1 } });
   console.log("🚀🚀 ~ newGrid", newGrid);
 
