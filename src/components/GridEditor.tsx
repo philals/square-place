@@ -3,10 +3,12 @@ import { Grid, ParttialGrid, processGrid } from "./processGrid";
 import React, { useState } from "react";
 import { CirclePicker, ColorResult } from "react-color";
 import { CSSGrid } from "./CSSGrid";
+import { trpc } from "../utils/trpc";
 
 export const GridEditor = (props: {}) => {
   const [grid, setGrid] = useState<ParttialGrid>(whiteGrid);
   const [color, setColor] = useState<string>();
+  const insertGrid = trpc.proxy.grid.insertGrid.useMutation();
   console.log("🚀🚀 ~ color", color);
 
   const rows = [
@@ -17,13 +19,10 @@ export const GridEditor = (props: {}) => {
   ];
 
   function changePixel(x: number, y: number) {
-    console.log("🚀🚀 ~ rows", rows);
     rows[x]![y]! = {
       color,
       version: 1,
     };
-    console.log("🚀🚀 ~ rows", rows);
-
     setGrid({
       pixels: [...rows[0]!, ...rows[1]!, ...rows[2]!, ...rows[3]!],
     });
@@ -40,6 +39,7 @@ export const GridEditor = (props: {}) => {
           setColor(color.hex);
         }}
       />
+      <button onClick={() => insertGrid.mutate(grid)}>Submit</button>
 
       <CSSGrid rows={rows} changePixel={changePixel} />
     </>

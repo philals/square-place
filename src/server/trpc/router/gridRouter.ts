@@ -1,10 +1,22 @@
 import { t } from "../utils";
 import { z } from "zod";
-
-const version = 1;
+import { parttialGridSchema } from "../../../../test";
 
 export const gridRouter = t.router({
-  makeAGrid: t.procedure
+  insertGrid: t.procedure
+    .input(parttialGridSchema)
+    .mutation(async ({ input, ctx }) => {
+      try {
+        await makeANewGrid(ctx.prisma, input);
+      } catch (error) {
+        console.log("🚀🚀 ~ error", error);
+      }
+
+      return {
+        greeting: `Hello ${input?.text ?? "world"}`,
+      };
+    }),
+  makeMantGrids: t.procedure
     .input(z.object({ text: z.string().nullish() }).nullish())
     .mutation(async ({ input, ctx }) => {
       try {
@@ -40,6 +52,33 @@ export const gridRouter = t.router({
     return {};
   }),
 });
+
+async function makeANewGrid(prisma: any, color: string) {
+  const newGrid = await prisma.grid.create({ data: { version: 1 } });
+  console.log("🚀🚀 ~ newGrid", newGrid);
+
+  const pixels = await prisma.pixel.createMany({
+    data: [
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+      { color, version: 1, gridId: newGrid.id },
+    ],
+  });
+  console.log("🚀🚀 ~ pixels", pixels);
+}
 
 async function makeNewGrid(prisma: any, color: string) {
   const newGrid = await prisma.grid.create({ data: { version: 1 } });

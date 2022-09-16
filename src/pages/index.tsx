@@ -7,7 +7,7 @@ import { GridEditor } from "../components/GridEditor";
 const Home: NextPage = () => {
   const hello = trpc.proxy.example.hello.useQuery({ text: "from tRPC" });
   const grids = trpc.proxy.grid.getAll.useQuery();
-  const mutation = trpc.proxy.grid.makeAGrid.useMutation();
+  const mutation = trpc.proxy.grid.makeMantGrids.useMutation();
   const deleteAll = trpc.proxy.grid.deleteAll.useMutation();
   // console.log("🚀🚀 ~ grids.data?.grids", grids.data?.grids);
   // console.log(
@@ -29,7 +29,7 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="container flex flex-col items-center justify-center min-h-screen p-4 mx-auto">
-        <GridRender grids={grids.data?.grids || []} />;
+        <GridRender grids={grids.data?.grids || []} />
         <button onClick={() => mutation.mutate()}>Mutation</button>
         <button onClick={() => deleteAll.mutate()}>Clear All</button>
         <div className="flex items-center justify-center w-full pt-6 text-2xl text-blue-500">

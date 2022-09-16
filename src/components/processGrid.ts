@@ -1,8 +1,10 @@
-import { Grid as pGrid, Pixel } from "@prisma/client";
+import { Pixel } from "@prisma/client";
 
 export type ArrayOfGrids = Array<ParttialGrid>;
 export type Grid = { pixels: Pixel[] };
-export type ParttialGrid = { pixels: Partial<Pixel>[] };
+export interface ParttialGrid {
+  pixels: Partial<Pixel>[];
+}
 
 export function processGrid(grids: ArrayOfGrids) {
   const it: string[][] = [];
