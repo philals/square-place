@@ -16,7 +16,7 @@ export const gridRouter = t.router({
         greeting: `Hello ${input?.text ?? "world"}`,
       };
     }),
-  makeMantGrids: t.procedure
+  makeManyGrids: t.procedure
     .input(z.object({ text: z.string().nullish() }).nullish())
     .mutation(async ({ input, ctx }) => {
       try {

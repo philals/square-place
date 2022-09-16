@@ -7,7 +7,7 @@ import { GridEditor } from "../components/GridEditor";
 const Home: NextPage = () => {
   const hello = trpc.proxy.example.hello.useQuery({ text: "from tRPC" });
   const grids = trpc.proxy.grid.getAll.useQuery();
-  const mutation = trpc.proxy.grid.makeMantGrids.useMutation();
+  const mutation = trpc.proxy.grid.makeManyGrids.useMutation();
   const deleteAll = trpc.proxy.grid.deleteAll.useMutation();
   // console.log("🚀🚀 ~ grids.data?.grids", grids.data?.grids);
   // console.log(
