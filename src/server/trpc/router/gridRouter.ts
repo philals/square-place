@@ -1,7 +1,6 @@
 import { t } from "../utils";
 import { z } from "zod";
 import { parttialGridSchema } from "../../../../test";
-import { version } from "os";
 
 export const gridRouter = t.router({
   insertGrid: t.procedure
