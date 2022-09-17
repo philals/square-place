@@ -1,6 +1,7 @@
 import { t } from "../utils";
 import { z } from "zod";
 import { parttialGridSchema } from "../../../../test";
+import { version } from "os";
 
 export const gridRouter = t.router({
   insertGrid: t.procedure
@@ -13,7 +14,7 @@ export const gridRouter = t.router({
       }
 
       return {
-        greeting: `Hello ${input?.text ?? "world"}`,
+        greeting: `Hello ${input ?? "world"}`,
       };
     }),
   makeManyGrids: t.procedure
@@ -53,30 +54,29 @@ export const gridRouter = t.router({
   }),
 });
 
-async function makeANewGrid(prisma: any, color: string) {
+async function makeANewGrid(
+  prisma: any,
+  color: {
+    pixels: {
+      // id?: string | undefined;
+      color?: string | undefined;
+      version?: number | undefined;
+      // gridId?: string | undefined;
+    }[];
+  }
+) {
   const newGrid = await prisma.grid.create({ data: { version: 1 } });
-  console.log("🚀🚀 ~ newGrid", newGrid);
 
-  const pixels = await prisma.pixel.createMany({
-    data: [
-      { color, version: 1, gridId: newGrid.id },
-      { color, version: 1, gridId: newGrid.id },
-      { color, version: 1, gridId: newGrid.id },
-      { color, version: 1, gridId: newGrid.id },
-      { color, version: 1, gridId: newGrid.id },
-      { color, version: 1, gridId: newGrid.id },
-      { color, version: 1, gridId: newGrid.id },
-      { color, version: 1, gridId: newGrid.id },
-      { color, version: 1, gridId: newGrid.id },
-      { color, version: 1, gridId: newGrid.id },
-      { color, version: 1, gridId: newGrid.id },
-      { color, version: 1, gridId: newGrid.id },
-      { color, version: 1, gridId: newGrid.id },
-      { color, version: 1, gridId: newGrid.id },
-      { color, version: 1, gridId: newGrid.id },
-      { color, version: 1, gridId: newGrid.id },
-    ],
+  const pixels = color.pixels.map((pixel) => {
+    return { color: pixel.color, version: pixel.version, gridId: newGrid.id };
   });
+
+  const createdPixels = await prisma.pixel.createMany({
+    data: pixels,
+  });
+
+  console.log("🚀🚀 ~ newGrid", newGrid);
+  console.log("🚀🚀 ~ createdPixels", createdPixels);
   console.log("🚀🚀 ~ pixels", pixels);
 }
 
