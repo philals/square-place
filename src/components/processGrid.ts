@@ -7,8 +7,13 @@ export interface ParttialGrid {
 }
 
 export function processGrid(grids: ArrayOfGrids) {
-  const it: string[][] = [];
+  const howManyToAdd = grids!.length % 4;
+  console.log("🚀🚀 ~ grids", grids);
+  for (let i = 0; i < howManyToAdd; i++) {
+    grids.push(whiteGrid);
+  }
 
+  const it: string[][] = [];
   for (let index = 0; index < grids.length / 4; index++) {
     const start = 4 * index;
     const fin = 4 * index + 4;
@@ -54,3 +59,72 @@ function getFourthFFromEach(fourGrids: ArrayOfGrids, row: number) {
     return grid.pixels.slice(12, 16).map((pixel) => pixel.color);
   });
 }
+
+const whiteGrid = {
+  pixels: [
+    {
+      color: "#FFFFFF",
+      version: 1,
+    },
+    {
+      color: "#FFFFFF",
+      version: 1,
+    },
+    {
+      color: "#FFFFFF",
+      version: 1,
+    },
+    {
+      color: "#FFFFFF",
+      version: 1,
+    },
+    {
+      color: "#FFFFFF",
+      version: 1,
+    },
+    {
+      color: "#FFFFFF",
+      version: 1,
+    },
+    {
+      color: "#FFFFFF",
+      version: 1,
+    },
+    {
+      color: "#FFFFFF",
+      version: 1,
+    },
+    {
+      color: "#FFFFFF",
+      version: 1,
+    },
+    {
+      color: "#FFFFFF",
+      version: 1,
+    },
+    {
+      color: "#FFFFFF",
+      version: 1,
+    },
+    {
+      color: "#FFFFFF",
+      version: 1,
+    },
+    {
+      color: "#FFFFFF",
+      version: 1,
+    },
+    {
+      color: "#FFFFFF",
+      version: 1,
+    },
+    {
+      color: "#FFFFFF",
+      version: 1,
+    },
+    {
+      color: "#FFFFFF",
+      version: 1,
+    },
+  ],
+};
