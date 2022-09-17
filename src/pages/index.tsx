@@ -1,7 +1,7 @@
 import type { NextPage } from "next";
 import Head from "next/head";
 import { trpc } from "../utils/trpc";
-import { GridRender } from "../components/GridRender";
+import { GridRender } from "../components/GridRender/GridRender";
 import { GridEditor } from "../components/GridEditor";
 import { LoadingSpinner } from "../components/LoadingSpinner/LoadingSpinner";
 
