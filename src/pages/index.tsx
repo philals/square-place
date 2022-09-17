@@ -3,6 +3,7 @@ import Head from "next/head";
 import { trpc } from "../utils/trpc";
 import { GridRender } from "../components/GridRender";
 import { GridEditor } from "../components/GridEditor";
+import { LoadingSpinner } from "../components/LoadingSpinner/LoadingSpinner";
 
 const Home: NextPage = () => {
   const hello = trpc.proxy.example.hello.useQuery({ text: "from tRPC" });
@@ -11,7 +12,7 @@ const Home: NextPage = () => {
   const deleteAll = trpc.proxy.grid.deleteAll.useMutation();
 
   if (grids.isLoading) {
-    return <p>Loading..</p>;
+    return <LoadingSpinner />;
   }
 
   return (
