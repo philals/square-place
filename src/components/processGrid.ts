@@ -1,4 +1,5 @@
 import { Pixel } from "@prisma/client";
+import { off } from "process";
 
 export type ArrayOfGrids = Array<ParttialGrid>;
 export type Grid = { pixels: Pixel[] };
@@ -59,71 +60,28 @@ function getFourthFFromEach(fourGrids: ArrayOfGrids, row: number) {
   });
 }
 
+const offWhitePixel = {
+  color: "#FFF1F1",
+  version: 1,
+};
+
 const whiteGrid = {
   pixels: [
-    {
-      color: "#FFFFFF",
-      version: 1,
-    },
-    {
-      color: "#FFFFFF",
-      version: 1,
-    },
-    {
-      color: "#FFFFFF",
-      version: 1,
-    },
-    {
-      color: "#FFFFFF",
-      version: 1,
-    },
-    {
-      color: "#FFFFFF",
-      version: 1,
-    },
-    {
-      color: "#FFFFFF",
-      version: 1,
-    },
-    {
-      color: "#FFFFFF",
-      version: 1,
-    },
-    {
-      color: "#FFFFFF",
-      version: 1,
-    },
-    {
-      color: "#FFFFFF",
-      version: 1,
-    },
-    {
-      color: "#FFFFFF",
-      version: 1,
-    },
-    {
-      color: "#FFFFFF",
-      version: 1,
-    },
-    {
-      color: "#FFFFFF",
-      version: 1,
-    },
-    {
-      color: "#FFFFFF",
-      version: 1,
-    },
-    {
-      color: "#FFFFFF",
-      version: 1,
-    },
-    {
-      color: "#FFFFFF",
-      version: 1,
-    },
-    {
-      color: "#FFFFFF",
-      version: 1,
-    },
+    offWhitePixel,
+    offWhitePixel,
+    offWhitePixel,
+    offWhitePixel,
+    offWhitePixel,
+    offWhitePixel,
+    offWhitePixel,
+    offWhitePixel,
+    offWhitePixel,
+    offWhitePixel,
+    offWhitePixel,
+    offWhitePixel,
+    offWhitePixel,
+    offWhitePixel,
+    offWhitePixel,
+    offWhitePixel,
   ],
 };
