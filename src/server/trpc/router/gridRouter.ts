@@ -10,7 +10,8 @@ export const gridRouter = t.router({
       try {
         await makeANewGrid(ctx.prisma, input);
       } catch (error) {
-        console.log("🚀🚀 ~ error", error);
+        console.error("🚀🚀 ~ error", error);
+        throw error;
       }
 
       return {
@@ -30,7 +31,8 @@ export const gridRouter = t.router({
         await makeNewGrid(ctx.prisma, "#083e12");
         await makeNewGrid(ctx.prisma, "#8386f5");
       } catch (error) {
-        console.log("🚀🚀 ~ error", error);
+        console.error("🚀🚀 ~ error", error);
+        throw error;
       }
 
       return {
@@ -71,18 +73,13 @@ async function makeANewGrid(
     return { color: pixel.color, version: pixel.version, gridId: newGrid.id };
   });
 
-  const createdPixels = await prisma.pixel.createMany({
+  await prisma.pixel.createMany({
     data: pixels,
   });
-
-  console.log("🚀🚀 ~ newGrid", newGrid);
-  console.log("🚀🚀 ~ createdPixels", createdPixels);
-  console.log("🚀🚀 ~ pixels", pixels);
 }
 
 async function makeNewGrid(prisma: any, color: string) {
   const newGrid = await prisma.grid.create({ data: { version: 1 } });
-  console.log("🚀🚀 ~ newGrid", newGrid);
 
   const pixels = await prisma.pixel.createMany({
     data: [
@@ -104,5 +101,4 @@ async function makeNewGrid(prisma: any, color: string) {
       { color, version: 1, gridId: newGrid.id },
     ],
   });
-  console.log("🚀🚀 ~ pixels", pixels);
 }

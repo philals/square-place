@@ -9,13 +9,6 @@ const Home: NextPage = () => {
   const grids = trpc.proxy.grid.getAll.useQuery();
   const mutation = trpc.proxy.grid.makeManyGrids.useMutation();
   const deleteAll = trpc.proxy.grid.deleteAll.useMutation();
-  // console.log("🚀🚀 ~ grids.data?.grids", grids.data?.grids);
-  // console.log(
-  //   "🚀🚀 ~ grids.data?.grids[0]?.pixels",
-  //   grids.data?.grids[0]?.pixels
-  // );
-
-  // console.log("🚀🚀 ~ STRING grids.data", JSON.stringify(grids.data));
 
   if (grids.isLoading) {
     return <p>Loading..</p>;

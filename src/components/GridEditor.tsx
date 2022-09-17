@@ -9,7 +9,6 @@ export const GridEditor = (props: {}) => {
   const [grid, setGrid] = useState<ParttialGrid>(whiteGrid);
   const [color, setColor] = useState<string>();
   const insertGrid = trpc.proxy.grid.insertGrid.useMutation();
-  console.log("🚀🚀 ~ color", color);
 
   const rows = [
     grid.pixels.slice(0, 4),

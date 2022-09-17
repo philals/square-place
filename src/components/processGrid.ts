@@ -8,7 +8,6 @@ export interface ParttialGrid {
 
 export function processGrid(grids: ArrayOfGrids) {
   const howManyToAdd = grids!.length % 4;
-  console.log("🚀🚀 ~ grids", grids);
   for (let i = 0; i < howManyToAdd; i++) {
     grids.push(whiteGrid);
   }
