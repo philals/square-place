@@ -6,7 +6,7 @@ export const createPixelSchema = z.object({
 });
 
 export const createGridSchema = z.object({
-  pixels: z.array(createPixelSchema),
+  pixels: z.array(createPixelSchema).length(16),
 });
 
 export const parttialGridSchema = z.object({
