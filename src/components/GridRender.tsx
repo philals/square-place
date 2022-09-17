@@ -1,5 +1,4 @@
 import PixelGrid from "react-pixel-grid";
-import { Grid as pGrid, Pixel } from "@prisma/client";
 import { ArrayOfGrids, processGrid } from "./processGrid";
 
 export const GridRender = (props: { grids: ArrayOfGrids }) => {
