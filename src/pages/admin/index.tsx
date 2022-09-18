@@ -2,6 +2,11 @@ import type { NextPage } from "next";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Button } from "../../components/Button";
 import { trpc } from "../../utils/trpc";
+import { ToastContainer, toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
+// minified version is also included
+// import 'react-toastify/dist/ReactToastify.min.css';
 
 type Inputs = {
   gridIds: string;
@@ -16,15 +21,40 @@ const Home: NextPage = () => {
   const deleteGrid = trpc.proxy.grid.deleteGrid.useMutation();
 
   const onSubmit: SubmitHandler<Inputs> = (data) => {
-    deleteGrid.mutate({ gridIds: data.gridIds.split(",") });
+    deleteGrid.mutate(
+      { gridIds: data.gridIds.split(",") },
+      {
+        onSuccess: (data, variables) => {
+          toast.success("Grids deleted", {
+            position: "bottom-right",
+            autoClose: 3000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        },
+        onError: (error, variables) => {
+          console.log("🚀🚀 ~ variables", variables);
+          console.error("🚀🚀 ~ error", error);
+          toast.error(error.message, {
+            position: "bottom-right",
+            autoClose: 10000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+          });
+        },
+      }
+    );
   };
-
-  if (deleteGrid.isError) {
-    throw deleteGrid.error;
-  }
 
   return (
     <body className="antialiased font-sans bg-gray-200 overflow-hidden">
+      <ToastContainer />
       <div className="bg-gray-100">
         <div className="mx-auto max-w-7xl py-6 sm:px-6 lg:px-8">
           <div className="md:grid md:grid-cols-3 md:gap-6">
