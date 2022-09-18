@@ -12,7 +12,7 @@ const Home: NextPage = () => {
   const deleteAll = trpc.proxy.grid.deleteAll.useMutation();
 
   if (grids.isLoading) {
-    return <LoadingSpinner />;
+    return <LoadingSpinner numberOfSquares={9} />;
   }
 
   return (
