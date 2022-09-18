@@ -53,6 +53,17 @@ export const gridRouter = t.router({
     await ctx.prisma.grid.deleteMany({});
     return {};
   }),
+  deleteGrid: t.procedure
+    .input(
+      z.object({
+        gridId: z.string(),
+      })
+    )
+    .mutation(async ({ ctx, input }) => {
+      await ctx.prisma.pixel.deleteMany({ where: { gridId: input.gridId } });
+      await ctx.prisma.grid.delete({ where: { id: input.gridId } });
+      return {};
+    }),
 });
 
 async function makeANewGrid(
