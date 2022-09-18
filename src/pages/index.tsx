@@ -8,8 +8,8 @@ import { LoadingSpinner } from "../components/LoadingSpinner/LoadingSpinner";
 const Home: NextPage = () => {
   const hello = trpc.proxy.example.hello.useQuery({ text: "from tRPC" });
   const grids = trpc.proxy.grid.getAll.useQuery();
-  const mutation = trpc.proxy.grid.makeManyGrids.useMutation();
-  const deleteAll = trpc.proxy.grid.deleteAll.useMutation();
+  // const mutation = trpc.proxy.grid.makeManyGrids.useMutation();
+  // const deleteAll = trpc.proxy.grid.deleteAll.useMutation();
 
   if (grids.isLoading) {
     return <LoadingSpinner numberOfSquares={9} />;
@@ -24,8 +24,8 @@ const Home: NextPage = () => {
       </Head>
       <main className="container flex flex-col items-center justify-center min-h-screen p-4 mx-auto">
         <GridRender grids={grids.data?.grids || []} />
-        <button onClick={() => mutation.mutate()}>Mutation</button>
-        <button onClick={() => deleteAll.mutate()}>Clear All</button>
+        {/* <button onClick={() => mutation.mutate()}>Mutation</button>
+        <button onClick={() => deleteAll.mutate()}>Clear All</button> */}
         <div className="flex items-center justify-center w-full pt-6 text-2xl text-blue-500">
           {hello.data ? <p>{hello.data.greeting}</p> : <p>Loading..</p>}
         </div>
