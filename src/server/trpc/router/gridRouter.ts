@@ -60,10 +60,10 @@ export const gridRouter = t.router({
       })
     )
     .mutation(async ({ ctx, input }) => {
-      input.gridIds.forEach(async (gridId) => {
+      for (const gridId of input.gridIds) {
         await ctx.prisma.pixel.deleteMany({ where: { gridId: gridId } });
         await ctx.prisma.grid.delete({ where: { id: gridId } });
-      });
+      }
       return {};
     }),
 });
