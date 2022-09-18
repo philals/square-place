@@ -1,7 +1,6 @@
 import type { NextPage } from "next";
 import { useForm, SubmitHandler } from "react-hook-form";
 import { Button } from "../../components/Button";
-import { ButtonSpinner } from "../../components/ButtonSpinner/ButtonSpinner";
 import { trpc } from "../../utils/trpc";
 
 type Inputs = {
@@ -23,8 +22,6 @@ const Home: NextPage = () => {
   if (deleteGrid.isError) {
     throw deleteGrid.error;
   }
-
-  //   return ;
 
   return (
     <body className="antialiased font-sans bg-gray-200 overflow-hidden">
