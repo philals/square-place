@@ -5,8 +5,6 @@ export const LoadingSpinner = ({
 }: {
   numberOfSquares: number;
 }): JSX.Element => {
-  console.log("🚀🚀 ~ numberOfSquares", numberOfSquares);
-
   return (
     <div className={styles.ldsContainer}>
       <div className={styles.ldsgrid}>

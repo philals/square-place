@@ -36,7 +36,6 @@ const Home: NextPage = () => {
           });
         },
         onError: (error, variables) => {
-          console.log("🚀🚀 ~ variables", variables);
           console.error("🚀🚀 ~ error", error);
           toast.error(error.message, {
             position: "bottom-right",
