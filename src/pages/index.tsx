@@ -6,7 +6,7 @@ import { GridEditor } from "../components/GridEditor";
 import { getAllGrids } from "../server/service/gridFunctions";
 import { Grid, Pixel } from "@prisma/client";
 
-export async function getServerSideProps(context) {
+export async function getServerSideProps() {
   const allGrids = await getAllGrids();
   return { props: allGrids }; // will be passed to the page component as props
 }
