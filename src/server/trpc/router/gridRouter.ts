@@ -1,6 +1,7 @@
 import { t } from "../utils";
 import { z } from "zod";
 import { parttialGridSchema } from "../../../../test";
+import { getAllGrids } from "../../service/gridFunctions";
 
 export const gridRouter = t.router({
   insertGrid: t.procedure
@@ -39,8 +40,7 @@ export const gridRouter = t.router({
       };
     }),
   getAll: t.procedure.query(async ({ ctx }) => {
-    const res = await ctx.prisma.grid.findMany({ include: { pixels: true } });
-    return { grids: res };
+    return await getAllGrids();
   }),
   getOne: t.procedure.query(async ({ ctx }) => {
     const res = await ctx.prisma.grid.findFirst({
