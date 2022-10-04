@@ -5,10 +5,12 @@ import { CirclePicker, ColorResult } from "react-color";
 import { CSSGrid } from "./CSSGrid";
 import { trpc } from "../utils/trpc";
 
-export const GridEditor = (props: {}) => {
+export const GridEditor = (props: { onSuccess: () => void }) => {
   const [grid, setGrid] = useState<ParttialGrid>(whiteGrid);
   const [color, setColor] = useState<string>();
-  const insertGrid = trpc.proxy.grid.insertGrid.useMutation();
+  const insertGrid = trpc.proxy.grid.insertGrid.useMutation({
+    onSuccess: props.onSuccess,
+  });
 
   const rows = [
     grid.pixels.slice(0, 4),

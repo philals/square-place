@@ -20,6 +20,10 @@ const Home: NextPage<
   {}
 > = (props) => {
   const hello = trpc.proxy.example.hello.useQuery({ text: "from tRPC" });
+  const grids = trpc.proxy.grid.getAll.useQuery(undefined, {
+    initialData: props.grids,
+  });
+  console.log("🚀🚀 ~ grids", grids);
   // const mutation = trpc.proxy.grid.makeManyGrids.useMutation();
   // const deleteAll = trpc.proxy.grid.deleteAll.useMutation();
 
@@ -31,14 +35,14 @@ const Home: NextPage<
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <main className="container flex flex-col items-center justify-center min-h-screen p-4 mx-auto">
-        <GridRender grids={props.grids || []} />
+        <GridRender grids={grids.data?.grids || []} />
         {/* <button onClick={() => mutation.mutate()}>Mutation</button>
         <button onClick={() => deleteAll.mutate()}>Clear All</button> */}
         <div className="flex items-center justify-center w-full pt-6 text-2xl text-blue-500">
           {hello.data ? <p>{hello.data.greeting}</p> : <p>Loading..</p>}
         </div>
         <h2>Edit this grid</h2>
-        <GridEditor />
+        <GridEditor onSuccess={() => grids.refetch()} />
       </main>
     </>
   );

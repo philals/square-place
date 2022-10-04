@@ -3,6 +3,7 @@ import { ArrayOfGrids, processGrid } from "../processGrid";
 
 export const GridRender = (props: { grids: ArrayOfGrids }) => {
   const it = processGrid(props.grids);
+  console.log("🚀🚀 ~ it", it);
 
   return (
     <PixelGrid
